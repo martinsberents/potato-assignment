@@ -3,3 +3,4 @@ sitepackages/
 *.pyc
 .storage
 index.yaml
+/node_modules
