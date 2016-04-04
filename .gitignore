@@ -1,2 +1,5 @@
 env/
 sitepackages/
+*.pyc
+.storage
+index.yaml
