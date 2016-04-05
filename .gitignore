@@ -6,3 +6,4 @@ index.yaml
 node_modules/
 bower_components/
 app.built.js
+*/static-dev/
