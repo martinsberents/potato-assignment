@@ -12,6 +12,9 @@ class Project(TimeStampedModel):
     def __str__(self):
         return self.title
 
+    def ticket_count(self):
+        return self.tickets.count()
+
 
 class Ticket(TimeStampedModel):
     title = models.CharField(max_length=200)
