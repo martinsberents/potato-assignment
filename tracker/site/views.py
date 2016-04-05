@@ -47,6 +47,15 @@ class ProjectListView(ListView):
     model = Project
     template_name = "site/project_list.html"
 
+    def get_context_data(self, **kwargs):
+        context = super(ProjectListView, self).get_context_data(**kwargs)
+        project_list = self.model.objects.all()
+        if self.request.user.is_authenticated():
+            user_tickets = self.request.user.tickets.all()
+            project_list = sorted(project_list, key=lambda x: x in set(map(lambda t: t.project, user_tickets)))
+            project_list.reverse()
+        context['project_list'] = project_list
+        return context
 
 project_list_view = ProjectListView.as_view()
 
