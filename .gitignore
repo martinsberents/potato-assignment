@@ -3,4 +3,5 @@ sitepackages/
 *.pyc
 .storage
 index.yaml
-/node_modules
+node_modules/
+bower_components/
