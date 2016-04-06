@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="large-8 large-centered columns">
+    <h4>Delete the ticket?</h4>
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="submit" class="button">
+    </form>
+</div>
+{% endblock %}
