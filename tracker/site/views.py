@@ -2,6 +2,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView, CreateView, UpdateView, ListView, DeleteView
+from djangae.contrib.consistency import improve_queryset_consistency as iqc
 
 from .forms import ProjectForm, TicketForm
 from .models import Project, Ticket
@@ -49,9 +50,9 @@ class ProjectListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ProjectListView, self).get_context_data(**kwargs)
-        project_list = self.model.objects.all()
+        project_list = iqc(self.model.objects.all())
         if self.request.user.is_authenticated():
-            user_tickets = self.request.user.tickets.all()
+            user_tickets = iqc(self.request.user.tickets.all())
             project_list = sorted(project_list, key=lambda x: x in set(map(lambda t: t.project, user_tickets)))
             project_list.reverse()
         context['project_list'] = project_list
@@ -105,7 +106,7 @@ class ProjectView(ProjectContextMixin, TemplateView):
         project = self.get_project()
         context.update({
             "project": project,
-            "tickets": project.tickets.all()
+            "tickets": iqc(project.tickets.all())
         })
         return context
 

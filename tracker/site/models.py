@@ -3,7 +3,7 @@ from django.db import models
 from django_extensions.db.models import TimeStampedModel
 
 from djangae.fields import RelatedSetField
-
+from djangae.contrib.consistency.signals import connect_signals; connect_signals()
 
 class Project(TimeStampedModel):
     title = models.CharField(max_length=200)
